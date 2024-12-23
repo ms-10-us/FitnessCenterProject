@@ -62,6 +62,9 @@ namespace FitnessCenterProject
             Console.WriteLine();
 
             Console.WriteLine("Members");
+
+            Console.WriteLine("{0, -5} {1,-5} {2, -20}", "Index", "Id", "Name");
+
             for (int i = 0; i < CommunityOfMembers.Count; i++)
             {
                 Console.WriteLine("{0, -5} {1,-5} {2, -20}", i + 1, CommunityOfMembers[i].Id, CommunityOfMembers[i].Name); 

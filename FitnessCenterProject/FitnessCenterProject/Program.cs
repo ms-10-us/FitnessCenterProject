@@ -1,4 +1,6 @@
-﻿namespace FitnessCenterProject
+﻿using System.IO;
+
+namespace FitnessCenterProject
 {
     internal class Program
     {
@@ -62,6 +64,12 @@
 
                                 Club club = new Club(clubName, clubAddress);
                                 singleClubMember.AssignedClub = club;
+
+                                NearMeClubs.AddClubs(club);
+
+                                FileOps.WriteMembersFile("Members.txt", id, name, (MemberType)memberType, clubName);
+                                FileOps.WriteClubsFile("Clubs.txt", clubName, clubAddress);
+
                                 break;
                             case (MemberType.MultiCLubMember):
                                 MultiClubMember multiClubMember = new MultiClubMember(id, name);
@@ -69,14 +77,20 @@
 
                                 Console.WriteLine("Enter Membership Points");
                                 multiClubMember.MembershipPoints = ValidateInterger(Console.ReadLine());
+
+                                FileOps.WriteMembersFile("Members.txt", id, name, (MemberType)memberType, "",multiClubMember.MembershipPoints);
+                                
                                 break;
+
+                            
                         }
                         break;
 
                     case (UserMenu.RemoveMembers):
-                        Console.WriteLine("Please Enter Index");
+                        Console.WriteLine("Please Enter Member Index");
                         int indexMember = ValidateInterger(Console.ReadLine());
                         CommunityFitness.RemoveMembers(indexMember);
+                        
                         break;
 
                     case (UserMenu.DisplayMembers):
@@ -149,6 +163,7 @@
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Please Enter a Valid Option!");
+                Console.ForegroundColor = ConsoleColor.Green;
             }
 
             return userInput;
@@ -170,6 +185,8 @@
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Please Enter a Valid Integer!");
+                    inputInteger = Console.ReadLine();
+                    Console.ForegroundColor = ConsoleColor.Green;
                 }
             }
 

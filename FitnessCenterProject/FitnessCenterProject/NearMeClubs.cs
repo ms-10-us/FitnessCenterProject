@@ -15,11 +15,19 @@ namespace FitnessCenterProject
 
         }
 
+        public static void AddClubs(Club club)
+        {
+            ClubsList.Add(club);
+        }
+
         public static void DisplayAllClubs()
         {
             Console.WriteLine();
 
             Console.WriteLine("Clubs");
+
+            Console.WriteLine("{0, -5} {1,-50} {2, -70}", "Index", "Name", "Address");
+
             for (int i = 0; i < ClubsList.Count; i++)
             {
                 Console.WriteLine("{0, -5} {1,-50} {2, -70}" ,i + 1, ClubsList[i].Name, ClubsList[i].Address); 

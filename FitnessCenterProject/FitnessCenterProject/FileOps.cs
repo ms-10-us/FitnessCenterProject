@@ -13,7 +13,6 @@ namespace FitnessCenterProject
             try
             {
                 FileInfo fileInfo = new FileInfo(path);
-                NearMeClubs.ClubsList.Clear();
 
                 using (StreamReader sr = new StreamReader(path))
                 {
@@ -50,7 +49,6 @@ namespace FitnessCenterProject
             try
             {
                 FileInfo fileInfo = new FileInfo(path);
-                CommunityFitness.CommunityOfMembers.Clear();
 
                 using (StreamReader sr = new StreamReader(path))
                 {
@@ -92,5 +90,31 @@ namespace FitnessCenterProject
             }
 
         }
+
+        public static void WriteMembersFile(string path, int id, string name, MemberType memberType, string clubName = "", int membershipPoints = 0)
+        {
+            using (StreamWriter sw = new StreamWriter(path, true))
+            {
+                if (memberType == MemberType.SingleClubMember)
+                {
+                    sw.Write($"{id}|{name}|{1}|{clubName}\n");
+                }
+                else if (memberType == MemberType.MultiCLubMember)
+                {
+                    sw.Write($"{id}|{name}|{2}|{membershipPoints}\n");
+                }
+            }
+        }
+
+        public static void WriteClubsFile(string path, string clubName, string address)
+        {
+            using (StreamWriter sr = new StreamWriter(path, true))
+            {
+                sr.Write($"{clubName}|{address}\n");
+
+
+            }
+        }
+
     }
 }
